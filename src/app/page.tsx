@@ -1,7 +1,18 @@
-import Image from "next/image";
+import { db } from "@/db";
 
-export default function Home() {
+export default async function Home() {
+  const items = await db.query.testing.findMany()
+
+
   return (
-    <h2>Start</h2>
+    <h2>
+      {items.map(item => {
+        return (
+          <div key={item.id}>
+            <h2 className="text-white">{item.name}</h2>
+          </div>
+        )
+      })}
+    </h2>
   );
 }
