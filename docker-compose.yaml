@@ -1,0 +1,17 @@
+#version: '3.9'
+services: 
+  pair-portal-db:
+    image: postgres
+    restart: always
+    container_name: pair-portal-db
+    ports: 
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: marvin123
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+
+
+volumes:
+  postgres:
