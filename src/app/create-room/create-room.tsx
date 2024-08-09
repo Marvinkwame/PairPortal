@@ -42,16 +42,12 @@ const CreateRoomForm = () => {
     },
   });
 
-  const router = useRouter()
+  const router = useRouter();
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-
     const room = await createRoomFunction(values);
 
-    router.push("/")
+    router.push("/your-room");
   }
 
   return (
@@ -115,7 +111,7 @@ const CreateRoomForm = () => {
               <FormItem>
                 <FormLabel>Languages or Tools</FormLabel>
                 <FormControl>
-                  <Input placeholder="Rust, Python, etc" {...field} />
+                  <Input placeholder="Rust, Python, TailwindCSS, etc" {...field} />
                 </FormControl>
                 <FormDescription>
                   Programming Languages and Tools to be used in your room.
