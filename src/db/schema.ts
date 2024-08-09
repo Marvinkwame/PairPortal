@@ -5,22 +5,23 @@ import {
   text,
   primaryKey,
   integer,
-} from "drizzle-orm/pg-core"
-import postgres from "postgres"
-import { drizzle } from "drizzle-orm/postgres-js"
-import type { AdapterAccount } from "next-auth/adapters"
+  uuid,
+} from "drizzle-orm/pg-core";
+import postgres from "postgres";
+import { drizzle } from "drizzle-orm/postgres-js";
+import type { AdapterAccount } from "next-auth/adapters";
+import { sql } from "drizzle-orm";
 
 export const testing = pgTable("testing", {
   id: text("id").notNull().primaryKey(),
   name: text("name"),
 });
 
- 
-const connectionString = "postgres://postgres:postgres@localhost:5432/drizzle"
-const pool = postgres(connectionString, { max: 1 })
- 
-export const db = drizzle(pool)
- 
+const connectionString = "postgres://postgres:postgres@localhost:5432/drizzle";
+const pool = postgres(connectionString, { max: 1 });
+
+export const db = drizzle(pool);
+
 export const users = pgTable("user", {
   id: text("id")
     .primaryKey()
@@ -29,8 +30,8 @@ export const users = pgTable("user", {
   email: text("email").unique(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
-})
- 
+});
+
 export const accounts = pgTable(
   "account",
   {
@@ -53,16 +54,16 @@ export const accounts = pgTable(
       columns: [account.provider, account.providerAccountId],
     }),
   })
-)
- 
+);
+
 export const sessions = pgTable("session", {
   sessionToken: text("sessionToken").primaryKey(),
   userId: text("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   expires: timestamp("expires", { mode: "date" }).notNull(),
-})
- 
+});
+
 export const verificationTokens = pgTable(
   "verificationToken",
   {
@@ -75,25 +76,20 @@ export const verificationTokens = pgTable(
       columns: [verificationToken.identifier, verificationToken.token],
     }),
   })
-)
- 
-export const authenticators = pgTable(
-  "authenticator",
-  {
-    credentialID: text("credentialID").notNull().unique(),
-    userId: text("userId")
-      .notNull()
-      .references(() => users.id, { onDelete: "cascade" }),
-    providerAccountId: text("providerAccountId").notNull(),
-    credentialPublicKey: text("credentialPublicKey").notNull(),
-    counter: integer("counter").notNull(),
-    credentialDeviceType: text("credentialDeviceType").notNull(),
-    credentialBackedUp: boolean("credentialBackedUp").notNull(),
-    transports: text("transports"),
-  },
-  (authenticator) => ({
-    compositePK: primaryKey({
-      columns: [authenticator.userId, authenticator.credentialID],
-    }),
-  })
-)
+);
+
+export const room = pgTable("room", {
+  id: uuid("id")
+    .default(sql`gen_random_uuid()`)
+    .notNull()
+    .primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  name: text("name").notNull(),
+  description: text("description").notNull(),
+  languages: text("language").notNull(),
+  gitHubRepository: text("gitHubRepository").notNull(),
+});
+
+export type Room = typeof room.$inferSelect;
