@@ -26,6 +26,12 @@ const YourRoomPage = async () => {
           return <UserRoomCard key={myRoom.id} myRoom={myRoom} />;
         })}
       </div>
+
+      {myRooms.length === 0 && (
+        <div>
+          Have haven&apos;t you created a room? Go ahead and create one room. Invite your buddies too.
+        </div>
+      )}
     </div>
   );
 };

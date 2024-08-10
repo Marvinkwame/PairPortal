@@ -18,7 +18,7 @@ const RoomTools = ({ tags }: RoomTools) => {
           className={cn(badgeVariants())}
           key={tag}
           onClick={() => {
-            router.push(`/browse?search=${tag}`);
+            router.push(`/search-room?search=${tag}`);
           }}
         >
           {tag}

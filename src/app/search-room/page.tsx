@@ -35,7 +35,7 @@ const SearchRoom = async ({ searchParams: { search } }: SearchRoomProps) => {
 
       {searchRooms.length === 0 && (
         <div>
-          <p>{`No Rooms found for "${search}". Try lowercase if you typed in uppercase.`}</p>
+          <p>{`No Rooms found. Try lowercase if you typed in uppercase and vice versa.`}</p>
         </div>
       )}
     </div>

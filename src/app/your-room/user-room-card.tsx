@@ -24,13 +24,16 @@ import Link from "next/link";
 import { FaGithub } from "react-icons/fa6";
 import RoomTools from "@/components/RoomTools";
 import { splitTools } from "@/lib/utils";
+import { getRoomOwner } from "@/hooks/room";
 
 
 interface UserRoomCardProps {
   myRoom: Room;
 }
 
-const UserRoomCard = ({ myRoom }: UserRoomCardProps) => {
+const UserRoomCard = async ({ myRoom }: UserRoomCardProps) => {
+  const owner = await getRoomOwner(myRoom.userId);
+
   return (
     <Card>
       <CardHeader>
@@ -53,6 +56,7 @@ const UserRoomCard = ({ myRoom }: UserRoomCardProps) => {
             </Link>
           </div>
         )}
+        <p>Created By: {owner?.name}</p>
         <RoomTools tags={splitTools(myRoom.languages)} />
       </CardContent>
       <CardFooter>

@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { Room, room } from "@/db/schema";
+import { Room, room, users } from "@/db/schema";
 import { eq, like } from "drizzle-orm";
 import { getSession } from "@/lib/auth";
 
@@ -27,4 +27,10 @@ export async function getRoom(searchTerm: string) {
   return await db.query.room.findMany({
     where: like(room.languages, `%${searchTerm}%`),
   });
+}
+
+export async function getRoomOwner(userId: string) {
+  return await db.query.users.findFirst({
+    where: eq(users.id, userId),
+  })
 }
