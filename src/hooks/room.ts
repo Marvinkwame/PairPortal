@@ -23,4 +23,8 @@ export async function getRoomById(roomId: string) {
   });
 }
 
-
+export async function getRoom(searchTerm: string) {
+  return await db.query.room.findMany({
+    where: like(room.languages, `%${searchTerm}%`),
+  });
+}

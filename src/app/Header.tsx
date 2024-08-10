@@ -102,7 +102,7 @@ const Header = () => {
               <Link href="/your-room" className="text-xl">
                 Your Room
               </Link>
-              <Link href="/all-rooms" className="text-xl">
+              <Link href="/search-room" className="text-xl">
                 Browse Rooms
               </Link>
             </>

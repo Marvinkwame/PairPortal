@@ -40,6 +40,8 @@ const VideoPlayerPortal = ({ room }: VideoPlayerPortalProps) => {
       apiKey,
       user: {
         id: userId,
+        name: session.data.user.name ?? undefined,
+        image: session.data.user.image ?? undefined,
       },
       tokenProvider: () => generateTokenAction(),
     });
