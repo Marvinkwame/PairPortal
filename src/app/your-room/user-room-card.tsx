@@ -22,6 +22,9 @@ import { Button } from "@/components/ui/button";
 import { Room } from "@/db/schema";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa6";
+import RoomTools from "@/components/RoomTools";
+import { splitTools } from "@/lib/utils";
+
 
 interface UserRoomCardProps {
   myRoom: Room;
@@ -32,9 +35,11 @@ const UserRoomCard = ({ myRoom }: UserRoomCardProps) => {
     <Card>
       <CardHeader>
         <CardTitle>{myRoom.name}</CardTitle>
-        <CardDescription className="line-clamp-2">{myRoom.description}</CardDescription>
+        <CardDescription className="line-clamp-2">
+          {myRoom.description}
+        </CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-col">
+      <CardContent className="flex flex-col gap-y-4">
         {myRoom.gitHubRepository && (
           <div className="flex items-center gap-4">
             <FaGithub size={30} />
@@ -48,6 +53,7 @@ const UserRoomCard = ({ myRoom }: UserRoomCardProps) => {
             </Link>
           </div>
         )}
+        <RoomTools tags={splitTools(myRoom.languages)} />
       </CardContent>
       <CardFooter>
         <div className="flex items-center justify-between gap-4">
