@@ -32,5 +32,13 @@ export async function getRoom(searchTerm: string) {
 export async function getRoomOwner(userId: string) {
   return await db.query.users.findFirst({
     where: eq(users.id, userId),
-  })
+  });
+}
+
+export async function deleteUserRoom(roomId: string) {
+  return await db.delete(room).where(eq(room.id, roomId));
+}
+
+export async function editRoom(roomData: Room) {
+  return await db.update(room).set(roomData).where(eq(room.id, roomData.id));
 }

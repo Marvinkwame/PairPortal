@@ -27,7 +27,7 @@ const SearchRoom = async ({ searchParams: { search } }: SearchRoomProps) => {
 
       <SearchBar />
 
-      <div className="mt-8 grid grid-cols-3">
+      <div className="mt-8 grid grid-cols-3 gap-4">
         {searchRooms.map((searchRoom) => {
           return <UserRoomCard key={searchRoom.id} myRoom={searchRoom} />;
         })}

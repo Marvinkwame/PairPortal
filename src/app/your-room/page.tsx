@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import UserRoomCard from "./user-room-card";
 import { unstable_noStore } from "next/cache";
-import { getUserRooms } from "@/hooks/room";
+import { getUserRooms, getRoomOwner } from "@/hooks/room";
 import RoomTools from "@/components/RoomTools";
 import { splitTools } from "../../lib/utils";
 

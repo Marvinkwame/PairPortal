@@ -99,10 +99,10 @@ const Header = () => {
         <nav className="flex items-center gap-4">
           {isLoggedIn && (
             <>
-              <Link href="/your-room" className="text-xl">
+              <Link href="/your-room" className="text-base font-semibold leading-6 ">
                 Your Room
               </Link>
-              <Link href="/search-room" className="text-xl">
+              <Link href="/search-room" className="text-base  font-semibold leading-6 ">
                 Browse Rooms
               </Link>
             </>
