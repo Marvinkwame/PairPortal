@@ -24,6 +24,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { DeleteIcon, LogInIcon, LogOutIcon } from "lucide-react";
+import { deleteUserAccount } from "./actions";
 
 function AccountDropdown() {
   const session = useSession();
@@ -43,6 +44,7 @@ function AccountDropdown() {
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
               onClick={async () => {
+                await deleteUserAccount();
                 signOut({ callbackUrl: "/" });
               }}
             >
@@ -99,10 +101,16 @@ const Header = () => {
         <nav className="flex items-center gap-4">
           {isLoggedIn && (
             <>
-              <Link href="/your-room" className="text-base font-semibold leading-6 ">
+              <Link
+                href="/your-room"
+                className="text-base font-semibold leading-6 "
+              >
                 Your Room
               </Link>
-              <Link href="/search-room" className="text-base  font-semibold leading-6 ">
+              <Link
+                href="/search-room"
+                className="text-base  font-semibold leading-6 "
+              >
                 Browse Rooms
               </Link>
             </>

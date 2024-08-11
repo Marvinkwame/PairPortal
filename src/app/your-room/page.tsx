@@ -3,9 +3,8 @@ import Link from "next/link";
 import React from "react";
 import UserRoomCard from "./user-room-card";
 import { unstable_noStore } from "next/cache";
-import { getUserRooms, getRoomOwner } from "@/hooks/room";
-import RoomTools from "@/components/RoomTools";
-import { splitTools } from "../../lib/utils";
+import { getUserRooms } from "@/hooks/room";
+import Image from "next/image";
 
 const YourRoomPage = async () => {
   unstable_noStore(); //doesnt cache the data on this page so every data here is fresh
@@ -28,8 +27,18 @@ const YourRoomPage = async () => {
       </div>
 
       {myRooms.length === 0 && (
-        <div>
-          Have haven&apos;t you created a room? Go ahead and create one room. Invite your buddies too.
+        <div className="grid place-items-center mt-8">
+          <Image
+            src="/images/create.svg"
+            alt="Nothing found"
+            width={250}
+            height={250}
+          />
+          <p className="mt-8 font-bold">
+            {" "}
+            Have haven&apos;t you created a room? Go ahead and create one room.
+            Invite your buddies too.
+          </p>
         </div>
       )}
     </div>

@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { useParams, useRouter } from "next/navigation";
 import { Room } from "@/db/schema";
 import { editRoomFunction } from "./actions";
+import { useToast } from "@/components/ui/use-toast";
 
 interface EditPageFormProps {
   room: Room;
@@ -33,6 +34,7 @@ const formSchema = z.object({
 const EditPageForm = ({ room }: EditPageFormProps) => {
   const params = useParams();
   const router = useRouter();
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -51,6 +53,9 @@ const EditPageForm = ({ room }: EditPageFormProps) => {
     });
 
     router.push("/your-room");
+    toast({
+      title: "Room Edited Successfully",
+    });
   };
 
   return (

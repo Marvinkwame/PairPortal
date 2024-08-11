@@ -42,3 +42,8 @@ export async function deleteUserRoom(roomId: string) {
 export async function editRoom(roomData: Room) {
   return await db.update(room).set(roomData).where(eq(room.id, roomData.id));
 }
+
+
+export async function deleteMyAccount(userId: string){
+  return await db.delete(users).where(eq(users.id, userId))
+}

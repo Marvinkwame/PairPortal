@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { createRoomFunction } from "./actions";
+import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
@@ -41,6 +42,7 @@ const CreateRoomForm = () => {
       languages: "",
     },
   });
+  const { toast } = useToast();
 
   const router = useRouter();
 
@@ -48,6 +50,10 @@ const CreateRoomForm = () => {
     const room = await createRoomFunction(values);
 
     router.push("/your-room");
+
+    toast({
+      title: "Room Created Successfully",
+    });
   }
 
   return (
@@ -111,7 +117,10 @@ const CreateRoomForm = () => {
               <FormItem>
                 <FormLabel>Languages or Tools</FormLabel>
                 <FormControl>
-                  <Input placeholder="Rust, Python, TailwindCSS, etc" {...field} />
+                  <Input
+                    placeholder="Rust, Python, TailwindCSS, etc"
+                    {...field}
+                  />
                 </FormControl>
                 <FormDescription>
                   Programming Languages and Tools to be used in your room.

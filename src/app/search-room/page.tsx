@@ -5,6 +5,7 @@ import SearchBar from "./SearchBar";
 import { getRoom } from "@/hooks/room";
 import UserRoomCard from "../your-room/user-room-card";
 import { unstable_noStore } from "next/cache";
+import Image from "next/image";
 
 interface SearchRoomProps {
   searchParams: { search: string };
@@ -34,8 +35,14 @@ const SearchRoom = async ({ searchParams: { search } }: SearchRoomProps) => {
       </div>
 
       {searchRooms.length === 0 && (
-        <div>
-          <p>{`No Rooms found. Try lowercase if you typed in uppercase and vice versa.`}</p>
+        <div className="grid place-items-center mt-8">
+          <Image
+            src="/images/Notfound.svg"
+            alt="Nothing found"
+            width={200}
+            height={200}
+          />
+          <p className="mt-8 font-bold">{`No Rooms found. Try lowercase if you typed in uppercase and vice versa.`}</p>
         </div>
       )}
     </div>
