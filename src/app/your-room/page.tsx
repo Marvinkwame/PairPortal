@@ -9,6 +9,7 @@ import Image from "next/image";
 const YourRoomPage = async () => {
   unstable_noStore(); //doesnt cache the data on this page so every data here is fresh
   const myRooms = await getUserRooms();
+  
 
   return (
     <div className="py-36 px-16">
@@ -22,7 +23,7 @@ const YourRoomPage = async () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
         {myRooms.map((myRoom) => {
-          return <UserRoomCard key={myRoom.id} myRoom={myRoom} />;
+          return <UserRoomCard key={myRoom.id} myRoom={myRoom}  />;
         })}
       </div>
 

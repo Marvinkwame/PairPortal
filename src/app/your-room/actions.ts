@@ -1,6 +1,6 @@
 "use server";
 
-import { deleteUserRoom, getRoomById } from "@/hooks/room";
+import { deleteUserRoom, getRoomById, getRoomOwner } from "@/hooks/room";
 import { getSession } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 
@@ -20,4 +20,10 @@ export async function deleteRoomAction(roomId: string) {
   await deleteUserRoom(roomId);
 
   revalidatePath("/your-room");
+}
+
+
+export async function getOwner(userId: string) {
+
+ await getRoomOwner(userId);
 }

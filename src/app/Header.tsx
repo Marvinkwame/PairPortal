@@ -96,7 +96,7 @@ const Header = () => {
   return (
     <header className="py-2 z-10 backdrop-blur-[12px] w-full border-b fixed top-0 left-0">
       <div className="container mx-auto flex items-center h-[80px] justify-between">
-        <Link href="/">PairPortal</Link>
+        <Link href="/" className="text-2xl font-bold">PairPortal</Link>
 
         <nav className="flex items-center gap-4">
           {isLoggedIn && (
